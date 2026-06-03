@@ -5,7 +5,12 @@ from fpdf import FPDF
 from logic import analyze_career_data
 
 # --- UI CONFIGURATION ---
-st.set_page_config(page_title="DataSight Analytics", page_icon="📈", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(
+    page_title="DataSight Analytics", 
+    page_icon="📈", 
+    layout="wide", 
+    initial_sidebar_state="expanded"
+)
 
 # --- SESSION STATE INITIALIZATION ---
 if "result" not in st.session_state:
@@ -29,9 +34,9 @@ st.markdown("""
         background-color: #0F172A !important; /* Deep Slate Background */
     }
     
-    /* Hide Default Streamlit Header & Footer for a native app feel */
-    header {visibility: hidden !important;}
-    footer {visibility: hidden !important;}
+    /* STABILITY FIX: Safely hide only the footer and main menu, leaving the header and sidebar toggle completely intact */
+    #MainMenu { visibility: hidden !important; }
+    footer { visibility: hidden !important; }
     
     /* Adjust Top Padding */
     .block-container {
@@ -170,16 +175,19 @@ def generate_pdf(result, current_sal, target_sal):
     pdf.multi_cell(0, 8, companies)
     return bytes(pdf.output())
 
+
 # --- SPEED OPTIMIZATION ---
 @st.cache_data
 def run_analysis(dataset_path, user_skills, wfh):
     return analyze_career_data(dataset_path, user_skills, wfh)
+
 
 def format_skill(skill):
     acronyms = ["sql", "aws", "gcp", "r", "api", "bi"]
     words = skill.split()
     formatted_words = [w.upper() if w.lower() in acronyms else w.title() for w in words]
     return " ".join(formatted_words)
+
 
 # --- SIDEBAR CONTROLS ---
 with st.sidebar:
@@ -198,12 +206,14 @@ with st.sidebar:
     st.write("")
     analyze_btn = st.button("Initialize Data Scan")
 
+
 # --- MAIN DASHBOARD AREA ---
 if not st.session_state.result and not analyze_btn:
-    st.markdown("<h1 style='font-size: 2.5rem; margin-bottom: 0;'>Peer Analysis Interface</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='font-size: 2.5rem; margin-bottom: 0;'>Market Analysis Output</h1>", unsafe_allow_html=True)
     st.markdown("<p style='color: #94A3B8; font-size: 1.1rem;'>Easily compare your technological profile against real-time job market requirements.</p>", unsafe_allow_html=True)
     st.write("")
     st.info("👈 System Standby: Please input your technology stack in the sidebar to begin analysis.")
+
 
 # If button is clicked, update the session state
 if analyze_btn:
@@ -217,6 +227,7 @@ if analyze_btn:
                 res = st.session_state.result
                 st.session_state.current_sal = f"${res['market_salary']:,.0f}" if not pd.isna(res['market_salary']) else "N/A"
                 st.session_state.target_sal = f"${res['target_salary']:,.0f}" if not pd.isna(res['target_salary']) else "N/A"
+
 
 # --- RENDER DASHBOARD (Only if data exists in memory) ---
 if st.session_state.result and analyze_btn or st.session_state.result:
@@ -252,20 +263,20 @@ if st.session_state.result and analyze_btn or st.session_state.result:
         chart_df = pd.DataFrame(list(result['top_skills_dict'].items()), columns=['Technology', 'Market Mentions'])
         chart_df['Technology'] = chart_df['Technology'].apply(format_skill)
         
-        # Sleek, grid-less Altair Chart
+        # Sleek, grid-less Altair Chart - SAFELY FORMATTED
         chart = alt.Chart(chart_df).mark_bar(
-            color='#6366F1', # Indigo Accent
+            color='#6366F1', 
             opacity=0.9, 
             cornerRadiusTopLeft=6, 
             cornerRadiusTopRight=6,
-            size=45 # Thicker, bolder bars
+            size=45 
         ).encode(
             x=alt.X('Technology:N', sort='-y', title="", axis=alt.Axis(labelColor='#94A3B8', labelAngle=-45, labelFontSize=13, grid=False)),
             y=alt.Y('Market Mentions:Q', title="Frequency in Job Postings", axis=alt.Axis(labelColor='#94A3B8', titleColor='#94A3B8', grid=True, gridColor='#334155', gridOpacity=0.4)),
             tooltip=[alt.Tooltip('Technology:N', title='Skill'), alt.Tooltip('Market Mentions:Q', title='Mentions')]
-        ).properties(height=400).configure_view(strokeWidth=0) # Removes outer border
+        ).properties(height=400).configure_view(strokeWidth=0)
         
-        st.altair_chart(chart, use_container_width=True, theme=None) # Disabling theme forces our custom colors
+        st.altair_chart(chart, use_container_width=True, theme=None) 
         
         st.write("")
         
