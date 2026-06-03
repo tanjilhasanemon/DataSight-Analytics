@@ -1,0 +1,22 @@
+# Python Virtual Environments
+venv/
+env/
+.venv/
+
+# Python Bytecode (Temporary files your computer makes)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Streamlit Secrets (In case you add API keys later)
+.streamlit/secrets.toml
+
+# OS Generated Files (Stops Mac/Windows from adding junk files)
+.DS_Store
+Thumbs.db
+
+# Large Data Backups 
+# Note: We are NOT ignoring 'dataset.csv' because Streamlit Cloud needs it to run.
+# However, we will ignore any massive raw backups you might accidentally drag in.
+*_raw.csv
+*_backup.csv
