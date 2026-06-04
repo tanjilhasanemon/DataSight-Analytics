@@ -1,8 +1,8 @@
 # 📈 DataSight Analytics
 
-**Algorithmic Career Intelligence & Skill-Gap Analysis Dashboard**
+**Algorithmic Career Intelligence & Predictive Skill-Gap Dashboard**
 
-DataSight Analytics is an offline, pure-Python data processing engine and interactive dashboard built to bridge the gap between academic skill sets and real-time market demands. By processing thousands of real-world job postings, the system mathematically calculates a user's market competitiveness, projects potential salary ROI for upskilling, and identifies active corporate hiring targets.
+DataSight Analytics is an offline, pure-Python Big Data processing ecosystem built to bridge the gap between academic skill sets and real-time market demands. By leveraging machine learning, automated data ingestion, and multidimensional data visualization, the system mathematically calculates a user's market competitiveness, projects AI-driven salary forecasts, and identifies active corporate hiring targets.
 
 ---
 
@@ -11,34 +11,35 @@ DataSight Analytics is an offline, pure-Python data processing engine and intera
 
 ---
 
-## ✨ Core Features
+## ✨ Core Innovations
 
-* **Algorithmic Competency Scoring:** Parses a user's raw technology stack and cross-references it against market datasets to generate a precise "Market Competitiveness Index."
-* **Salary ROI Predictor:** Dynamically calculates the user's median market value and projects the exact financial impact (ROI) of closing their primary skill deficit.
-* **Interactive Data Visualization:** Utilizes `Altair` to render sleek, grid-less visualizations of real-time core technology demands.
-* **Corporate Matchmaker:** Extracts and ranks top hiring entities actively seeking the user's specific competency cluster.
+* **AI-Driven Financial Forecasting:** Utilizes a pre-trained `scikit-learn` Random Forest Regressor to predict highly personalized market value and salary ROI based on complex skill combinations.
+* **Automated Data Ingestion Engine:** Features a standalone `BeautifulSoup4` web scraping pipeline engineered to extract, clean, and synchronize unstructured job market data into structured datasets.
+* **Multi-Dimensional Gap Analysis:** Deploys `Plotly` radar (spider-web) charts to visually overlay a user's specific competency cluster against structural market demands.
+* **Algorithmic Competency Scoring:** Parses a user's raw technology stack and cross-references it against market datasets using deterministic regex tokenization to generate a precise "Competitiveness Index."
 * **Executive Strategy Export:** Features a native PDF generation engine (`FPDF2`) to compile and download a personalized, data-driven career blueprint.
-* **Premium UI/UX:** Custom CSS injection completely overhauls the default Streamlit interface, delivering a modern, deep-slate "Glassmorphism" aesthetic.
+* **Stateless Architecture:** Engineered entirely without external databases or heavy APIs, prioritizing zero-latency in-memory processing via Pandas and Streamlit session states.
 
 ---
 
 ## 🛠️ Technology Stack
 
-* **Frontend:** [Streamlit](https://streamlit.io/) (with custom CSS injection)
-* **Backend Engine:** Pure Python
+* **Frontend & State Management:** [Streamlit](https://streamlit.io/) (with custom CSS injection)
+* **Machine Learning:** [Scikit-Learn](https://scikit-learn.org/) & [Joblib](https://joblib.readthedocs.io/)
+* **Data Ingestion (Web Scraping):** [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/) & Requests
 * **Data Processing:** [Pandas](https://pandas.pydata.org/)
-* **Data Visualization:** [Altair](https://altair-viz.github.io/)
+* **Data Visualization:** [Plotly](https://plotly.com/python/) & [Altair](https://altair-viz.github.io/)
 * **PDF Generation:** [FPDF2](https://pyfpdf.github.io/fpdf2/)
 
 ---
 
-## 📂 System Architecture
+## 📂 System Architecture (The 3-Part Ecosystem)
 
-The software is engineered with a strict separation of concerns, ensuring high performance without relying on external APIs.
+The software is engineered with a strict separation of concerns, operating as a continuous data pipeline:
 
-* `app.py`: The presentation layer. Handles state management, UI rendering, caching, and PDF generation.
-* `logic.py`: The processing engine. Handles regex tokenization, DataFrame filtering, and mathematical gap analysis.
-* `dataset.csv`: The compressed market intelligence data source.
+1. **The Ingestion Layer (`scraper.py`):** An independent pipeline that extracts live market nodes from job boards, cleans the data, and updates the core dataset.
+2. **The AI Layer (`train_model.py`):** An offline machine learning script that trains a Random Forest model on the latest dataset, exporting its logic (`.pkl`) for low-latency production use.
+3. **The Presentation Layer (`app.py` & `logic.py`):** The user-facing dashboard that loads the AI models into RAM, handles state management, UI rendering, and multidimensional visualization.
 
 ---
 
@@ -48,5 +49,5 @@ To run this application locally on your machine:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/YOUR_GITHUB_USERNAME/DataSight-Analytics.git](https://github.com/YOUR_GITHUB_USERNAME/DataSight-Analytics.git)
+   git clone [https://github.com/tanjilhasanemon/DataSight-Analytics.git](https://github.com/tanjilhasanemon/DataSight-Analytics.git)
    cd DataSight-Analytics

@@ -2,3 +2,8 @@ streamlit
 pandas
 fpdf2
 altair
+scikit-learn
+joblib
+plotly
+beautifulsoup4
+requests
