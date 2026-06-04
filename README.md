@@ -50,4 +50,8 @@ To run this application locally on your machine:
 1. **Clone the repository:**
    ```bash
    git clone [https://github.com/tanjilhasanemon/DataSight-Analytics.git](https://github.com/tanjilhasanemon/DataSight-Analytics.git)
+<<<<<<< HEAD
    cd DataSight-Analytics
+=======
+   cd DataSight-Analytics
+>>>>>>> 82e5187f2bab695be4afb6acc4948e72b39477be
