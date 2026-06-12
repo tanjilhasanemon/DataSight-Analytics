@@ -177,8 +177,16 @@ if analyze_btn:
                             
                     df_curr = pd.DataFrame([curr_data], columns=cols)
                     df_targ = pd.DataFrame([targ_data], columns=cols)
+                    
                     ai_curr = ai_model.predict(df_curr)[0]
                     ai_targ = ai_model.predict(df_targ)[0]
+                    
+                    # --- ENTERPRISE UX SAFEGUARD ---
+                    # Prevents the AI from showing negative ROI if statistical
+                    # dataset quirks associate a new skill with a lower-paying job tier.
+                    if ai_targ < ai_curr:
+                        ai_targ = ai_curr
+                        
                     st.session_state.current_sal = f"${ai_curr:,.0f} (AI)"
                     st.session_state.target_sal = f"${ai_targ:,.0f} (AI)"
                 else:
